@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OTP Verification</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+<div class="bg-white p-8 rounded-2xl shadow-lg w-96 text-center">
+
+<h2 class="text-2xl font-bold mb-2">Verify Your Account</h2>
+<p class="text-gray-500 mb-6">Enter the 6-digit OTP sent to your email</p>
+
+<form action="/auth/verify-otp" method="POST" class="space-y-6">
+
+<!-- OTP Inputs -->
+<div class="flex justify-between">
+
+<input type="text" maxlength="1" name="otp1"
+class="w-12 h-12 text-center text-xl border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+
+<input type="text" maxlength="1" name="otp2"
+class="w-12 h-12 text-center text-xl border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+
+<input type="text" maxlength="1" name="otp3"
+class="w-12 h-12 text-center text-xl border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+
+<input type="text" maxlength="1" name="otp4"
+class="w-12 h-12 text-center text-xl border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+
+<input type="text" maxlength="1" name="otp5"
+class="w-12 h-12 text-center text-xl border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+
+<input type="text" maxlength="1" name="otp6"
+class="w-12 h-12 text-center text-xl border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+
+</div>
+
+<!-- Hidden full OTP field -->
+<input type="hidden" name="otp" id="otp">
+
+<!-- Email field (important for backend) -->
+<input type="email" name="email" placeholder="Enter Email"
+class="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-400" required>
+
+<button type="submit"
+class="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition">
+Verify OTP
+</button>
+
+</form>
+
+<p class="text-sm text-gray-500 mt-4">
+Didn’t receive code?
+<a href="/user/resend-otp" class="text-blue-500">Resend OTP</a>
+</p>
+
+</div>
+
+<!-- JS to combine OTP -->
+<script>
+const inputs = document.querySelectorAll('input[type="text"]');
+const hiddenOtp = document.getElementById('otp');
+
+inputs.forEach((input, index) => {
+    input.addEventListener('input', () => {
+
+        if(input.value.length === 1 && index < inputs.length - 1){
+            inputs[index + 1].focus();
+        }
+
+        let otp = "";
+        inputs.forEach(i => otp += i.value);
+        hiddenOtp.value = otp;
+    });
+});
+</script>
+
+</body>
+</html>

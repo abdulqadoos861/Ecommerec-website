@@ -5,7 +5,7 @@ const ownerschema = mongoose.Schema({
     username : String,
     fullname : String,
     email : {
-        type : string,
+        type : String,
         unique : true,
         required : true,
     },
@@ -16,7 +16,12 @@ const ownerschema = mongoose.Schema({
     },
     contact : String,
     picture : String,
-    address : string
+    address : String,
+    otp : Number,
+    isverified : {
+        type : Boolean,
+        default : 0
+    }
 });
 
-module.exports = mongoose.model(owner , ownerschema);
+module.exports = mongoose.model('owner' , ownerschema);

@@ -7,6 +7,7 @@ const db = require('./config/mongooseConnection.js');
 const ownerRouter = require('./routes/ownerRouter.js');
 const  userRouter = require('./routes/userRouter.js');
 const productsRouter = require('./routes/productsRouter.js')
+const authRouter  = require('./routes/authenticationRouter.js')
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -17,6 +18,7 @@ app.set('view engine','ejs');
 app.use('/owner',ownerRouter);
 app.use('/user',userRouter);
 app.use('/product' , productsRouter);
+app.use('/auth',authRouter);
 
 app.get('/',function (req , res){
     res.send('Hello je kaisa hn ap .');

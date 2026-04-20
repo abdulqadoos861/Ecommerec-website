@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb:??127.0.0.1:27017/scatch');
+
 const userschema = mongoose.Schema({
     username : String,
     fullname : String,
     email : {
-        type : string,
+        type : String,
         unique : true,
         required : true,
     },
@@ -13,14 +13,21 @@ const userschema = mongoose.Schema({
         type : Array,
         default:[]
     },
-    isadmin : Boolean,
     orders : {
         type : Array,
         default:[]
     },
     contact : String,
-    picture : String,
-    address : string
+    picture : {
+        type: String,
+        default : "abc.jpg"
+    },
+    address : String,
+    otp : Number,
+    isverified : {
+        type : Boolean,
+        default : 0
+    }
 });
 
-module.exports = mongoose.model(user , userschema);
+module.exports = mongoose.model('user', userschema);
